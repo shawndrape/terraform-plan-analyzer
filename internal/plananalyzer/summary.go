@@ -5,19 +5,19 @@ package plananalyzer
 // replacements (["create","delete"] or ["delete","create"]) and forgets (["forget"])
 // are excluded per V1, V2.
 type Summary struct {
-	Created     int
-	Modified    int
-	Destroyed   int
-	Replaced    int
-	ModuleCount int
+	Created        int
+	Modified       int
+	Destroyed      int
+	Replaced       int
+	WorkspaceCount int
 }
 
 // Summarize aggregates counts across all plans in the analyzer.
-// ModuleCount equals the number of distinct workspaces/plans analyzed (V9).
+// WorkspaceCount equals the number of distinct workspaces/plans analyzed (V9).
 // Must be called after ProcessPlans() so ToCreate/ToUpdate/ToDestroy/ToReplace
 // are populated on each PlanExtended.
 func (pa *PlanAnalyzer) Summarize() Summary {
-	s := Summary{ModuleCount: len(pa.Plans)}
+	s := Summary{WorkspaceCount: len(pa.Plans)}
 	for _, plan := range pa.Plans {
 		s.Created += len(plan.ToCreate)
 		s.Modified += len(plan.ToUpdate)

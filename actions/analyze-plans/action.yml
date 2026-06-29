@@ -24,9 +24,9 @@ outputs:
   replaced:
     description: Total resources to be replaced (create-before-destroy or destroy-before-create) across all plans
     value: ${{ steps.run-report.outputs.replaced }}
-  module_count:
-    description: Number of distinct modules/workspaces analyzed
-    value: ${{ steps.run-report.outputs.module_count }}
+  workspace_count:
+    description: Number of distinct workspaces analyzed
+    value: ${{ steps.run-report.outputs.workspace_count }}
 runs:
   using: composite
   steps:

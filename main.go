@@ -41,8 +41,8 @@ func main() {
 
 			if cCtx.Bool("summary") {
 				s := analyzedPlans.Summarize()
-				fmt.Printf("::summary:: created=%d modified=%d destroyed=%d replaced=%d module_count=%d\n",
-					s.Created, s.Modified, s.Destroyed, s.Replaced, s.ModuleCount)
+				fmt.Printf("::summary:: created=%d modified=%d destroyed=%d replaced=%d workspace_count=%d\n",
+					s.Created, s.Modified, s.Destroyed, s.Replaced, s.WorkspaceCount)
 			}
 
 			report := analyzedPlans.GenerateReport()

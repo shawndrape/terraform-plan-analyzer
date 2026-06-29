@@ -11,7 +11,7 @@ func TestSummarize_empty(t *testing.T) {
 	pa := NewPlanAnalyzer([]PlanExtended{})
 	pa.ProcessPlans()
 	s := pa.Summarize()
-	assert.Equal(t, Summary{}, s, "empty plans: all counts and ModuleCount should be zero")
+	assert.Equal(t, Summary{}, s, "empty plans: all counts and WorkspaceCount should be zero")
 }
 
 // TestSummarize_destroyOnly verifies that a single pure-delete plan produces
@@ -35,7 +35,7 @@ func TestSummarize_destroyOnly(t *testing.T) {
 	assert.Equal(t, 0, s.Modified)
 	assert.Equal(t, 1, s.Destroyed, "V1: pure delete must count toward Destroyed")
 	assert.Equal(t, 0, s.Replaced)
-	assert.Equal(t, 1, s.ModuleCount, "V9: ModuleCount must equal number of plans")
+	assert.Equal(t, 1, s.WorkspaceCount, "V9: WorkspaceCount must equal number of plans")
 }
 
 // TestSummarize_replaceOnly_destroyedZero verifies that a create-before-destroy
@@ -57,7 +57,7 @@ func TestSummarize_replaceOnly_destroyedZero(t *testing.T) {
 	s := pa.Summarize()
 	assert.Equal(t, 1, s.Replaced)
 	assert.Equal(t, 0, s.Destroyed, "V2: replacement must NOT count as a destroy")
-	assert.Equal(t, 1, s.ModuleCount)
+	assert.Equal(t, 1, s.WorkspaceCount)
 }
 
 // TestSummarize_multiWorkspace verifies that counts are summed across all plans
@@ -90,5 +90,5 @@ func TestSummarize_multiWorkspace(t *testing.T) {
 	assert.Equal(t, 1, s.Modified, "modified: 1+0")
 	assert.Equal(t, 3, s.Destroyed, "destroyed: 1+2")
 	assert.Equal(t, 1, s.Replaced, "replaced: 0+1")
-	assert.Equal(t, 2, s.ModuleCount, "V9: two workspaces")
+	assert.Equal(t, 2, s.WorkspaceCount, "V9: two workspaces")
 }
